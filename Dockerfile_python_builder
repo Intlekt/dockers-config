@@ -1,4 +1,6 @@
 FROM python:3.8-slim AS build_libieml
 ARG NB_CORES=1
+LABEL org.opencontainers.image.source https://github.com/Intlekt/dockers-config/pulls
 
 RUN apt-get update && apt-get install -y git g++ cmake default-jre pkg-config uuid-dev
+

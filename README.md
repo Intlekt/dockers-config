@@ -1,6 +1,6 @@
-# dockers-config
+# Dockers config
 
-Other repos requires some docker images built from this repo. This images are published on
+Other repos require some docker images built from this repo. This images are published on
 [github container registry](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry).
 
 ## Build dockers
