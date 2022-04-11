@@ -28,3 +28,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Build the Wasm Builder Docker Image
         run: docker build -t ghcr.io/intlekt/intlket_wasm_builder . -f Dockerfile_wasm_builder
+  test_builder:
+    name: Test Builder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Test Builder Docker Image
+        run: docker build -t ghcr.io/intlekt/intlket_test_builder . -f Dockerfile_test_builder
