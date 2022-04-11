@@ -11,4 +11,7 @@ docker push ghcr.io/intlekt/intlket_python_builder
 
 docker build -t ghcr.io/intlekt/intlket_wasm_builder . -f Dockerfile_wasm_builder
 docker push ghcr.io/intlekt/intlket_wasm_builder
+
+docker build -t ghcr.io/intlekt/intlket_test_builder . -f Dockerfile_test_builder
+docker push ghcr.io/intlekt/intlket_test_builder
 ```

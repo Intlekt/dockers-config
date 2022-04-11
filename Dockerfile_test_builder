@@ -1,0 +1,5 @@
+FROM alpine:3.15 AS build_test
+ARG NB_CORES=1
+LABEL org.opencontainers.image.source https://github.com/Intlekt/dockers-config/pulls
+
+RUN apk update && apk add --no-cache pkgconfig libuuid openjdk11 cmake git g++ make util-linux-dev
