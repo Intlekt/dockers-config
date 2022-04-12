@@ -1,0 +1,33 @@
+name: Build
+
+on:
+  pull_request:
+    branches:
+      - master
+
+  workflow_dispatch:
+    branches:
+      - '**'
+
+jobs:
+  python_builder:
+    name: Python Builder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Python Builder Docker Image
+        run: docker build -t ghcr.io/intlekt/intlekt_python_builder . -f Dockerfile_python_builder
+  wasm_builder:
+    name: Wasm Builder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Wasm Builder Docker Image
+        run: docker build -t ghcr.io/intlekt/intlekt_wasm_builder . -f Dockerfile_wasm_builder
+  test_builder:
+    name: Test Builder
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build the Test Builder Docker Image
+        run: docker build -t ghcr.io/intlekt/intlekt_test_builder . -f Dockerfile_test_builder
