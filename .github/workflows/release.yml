@@ -1,16 +1,31 @@
-name: Build
+name: Release
+
+# https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry
 
 on:
   push:
     branches:
       - master
 
+env:
+  REGISTRY: ghcr.io
+
 jobs:
   python_builder:
     name: Python Builder
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build the Python Builder Docker Image
         run: |
           docker build -t ghcr.io/intlekt/intlekt_python_builder . -f Dockerfile_python_builder
@@ -18,8 +33,18 @@ jobs:
   wasm_builder:
     name: Wasm Builder
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build the Wasm Builder Docker Image
         run: |
           docker build -t ghcr.io/intlekt/intlekt_wasm_builder . -f Dockerfile_wasm_builder
@@ -27,8 +52,18 @@ jobs:
   test_builder:
     name: Test Builder
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build the Test Builder Docker Image
         run: |
           docker build -t ghcr.io/intlekt/intlekt_test_builder . -f Dockerfile_test_builder
